@@ -229,6 +229,30 @@
   }
   .save-btn:hover { transform: translateY(-2px); }
   .saved-msg { color: var(--correct); font-size: 13px; text-align: center; display: none; margin-bottom: 8px; }
+
+  /* WELCOME PAGE */
+  .welcome-screen { text-align: center; }
+  .welcome-gopher { font-size: 56px; display: block; margin-bottom: 16px; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  .welcome-title { font-family: 'Bebas Neue', cursive; font-size: clamp(28px, 7vw, 42px); letter-spacing: 4px; margin-bottom: 8px; }
+  .welcome-title span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .welcome-subtitle { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+  .welcome-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; text-align: left; }
+  .feature-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .feature-icon { font-size: 20px; margin-bottom: 6px; display: block; }
+  .feature-title { font-family: 'Bebas Neue', cursive; font-size: 15px; letter-spacing: 2px; color: var(--accent); margin-bottom: 4px; }
+  .feature-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .welcome-topics { background: rgba(0,172,215,0.05); border: 1px solid rgba(0,172,215,0.15); border-radius: 12px; padding: 16px; margin-bottom: 24px; text-align: left; }
+  .topics-title { font-family: 'Bebas Neue', cursive; font-size: 14px; letter-spacing: 2px; color: var(--accent); margin-bottom: 10px; }
+  .topics-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+  .topic-tag { background: rgba(0,172,215,0.1); border: 1px solid rgba(0,172,215,0.2); border-radius: 99px; padding: 4px 12px; font-size: 11px; color: var(--accent); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; }
+  .name-form { margin-bottom: 20px; }
+  .name-form label { display: block; font-size: 12px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; text-align: left; }
+  .name-form input { width: 100%; padding: 12px 16px; background: #0d0d0d; border: 1.5px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; outline: none; box-sizing: border-box; transition: border-color 0.2s; }
+  .name-form input:focus { border-color: var(--accent); }
+  .enter-btn { width: 100%; padding: 17px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border: none; border-radius: 12px; color: #fff; cursor: pointer; font-family: 'Bebas Neue', cursive; font-size: 22px; letter-spacing: 4px; transition: transform 0.15s ease, box-shadow 0.15s ease; box-shadow: 0 8px 30px rgba(0,172,215,0.2); }
+  .enter-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,172,215,0.3); }
+  .welcome-msg { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 6px; min-height: 28px; }
 </style>
 </head>
 <body>
@@ -238,6 +262,7 @@
     <h1>Imperative in Go</h1>
     <p>01edu Curriculum Quiz</p>
     <p style="color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;opacity:0.5;">Built by Chekus Joseph</p>
+    <button onclick="stopTimer(); show('welcomeScreen')" style="margin-top:10px;background:transparent;border:1px solid #2a2a2a;border-radius:99px;color:#666;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.borderColor='#00acd7';this.style.color='#00acd7'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#666'">← Home</button>
   </div>
 
   <div id="progressArea" style="display:none;">
@@ -250,12 +275,75 @@
   </div>
 
   <div class="card">
+
+    <!-- WELCOME -->
+    <div id="welcomeScreen" class="welcome-screen">
+      <span class="welcome-gopher">🐹</span>
+      <div class="welcome-msg" id="welcomeMsg"></div>
+      <div class="welcome-title">Welcome to <span>Imperative in Go</span></div>
+      <p class="welcome-subtitle">The ultimate quiz for 01edu Go curriculum students. Test yourself on real project concepts, Go fundamentals, and senior-level patterns.</p>
+
+      <div class="welcome-features">
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <div class="feature-title">252 Questions</div>
+          <div class="feature-desc">Handcrafted questions covering every 01edu Go project</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⏱</span>
+          <div class="feature-title">3 Difficulty Levels</div>
+          <div class="feature-desc">Easy (30s), Medium (20s), Hard (10s) per question</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🏆</span>
+          <div class="feature-title">Leaderboard</div>
+          <div class="feature-desc">Compete with others and save your high scores</div>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🔀</span>
+          <div class="feature-title">Always Fresh</div>
+          <div class="feature-desc">25 random questions each round — never the same quiz twice</div>
+        </div>
+      </div>
+
+      <div class="welcome-topics">
+        <div class="topics-title">📚 Topics Covered</div>
+        <div class="topics-grid">
+          <span class="topic-tag">ascii-art</span>
+          <span class="topic-tag">ascii-web</span>
+          <span class="topic-tag">go-reloaded</span>
+          <span class="topic-tag">lem-in</span>
+          <span class="topic-tag">forum</span>
+          <span class="topic-tag">groupie-tracker</span>
+          <span class="topic-tag">net-cat</span>
+          <span class="topic-tag">my-ls</span>
+          <span class="topic-tag">blockchain</span>
+          <span class="topic-tag">make-your-game</span>
+          <span class="topic-tag">strings</span>
+          <span class="topic-tag">goroutines</span>
+          <span class="topic-tag">interfaces</span>
+          <span class="topic-tag">context</span>
+          <span class="topic-tag">testing</span>
+          <span class="topic-tag">senior go</span>
+        </div>
+      </div>
+
+      <div class="name-form">
+        <label>👤 Your name (for the leaderboard)</label>
+        <input type="text" id="visitorName" placeholder="Enter your name..." maxlength="20"
+          onfocus="this.style.borderColor='#00acd7'" onblur="this.style.borderColor='#2a2a2a'"
+          onkeydown="if(event.key==='Enter') enterApp()" />
+      </div>
+      <button class="enter-btn" onclick="enterApp()">Let's Go 🐹</button>
+    </div>
+
     <!-- START -->
-    <div id="startScreen" class="start-screen">
+    <div id="startScreen" class="start-screen" style="display:none;">
       <div class="lang-badge">01edu · Go Projects</div>
-      <p>Test your knowledge of 01edu Go projects — ascii-art, ascii-web, lem-in, forum, and more. Pick a difficulty and go!</p>
+      <p id="startWelcome" style="font-weight:700;font-size:16px;color:var(--text);margin-bottom:4px;"></p>
+      <p>Pick a difficulty and test your Go knowledge!</p>
       <div class="stats-row">
-        <div class="stat-pill"><div class="num">199</div><div class="lbl">Questions</div></div>
+        <div class="stat-pill"><div class="num">252</div><div class="lbl">Questions</div></div>
         <div class="stat-pill"><div class="num">25</div><div class="lbl">Per Round</div></div>
         <div class="stat-pill"><div class="num">∞</div><div class="lbl">Replays</div></div>
       </div>
@@ -1918,6 +2006,550 @@ const ALL_QUESTIONS = [
     ],
     answer: 1,
     explanation: "For each of the 8 rows (0-7), loop over every character in the input and print that row's line from its font block — building each horizontal line left to right."
+  },
+  // ── 50 MORE QUESTIONS (BATCH 3) ──────────────────────────────
+
+  // Go fundamentals & syntax
+  {
+    q: "What is the output of this code?",
+    code: "x := 10\nif x := 5; x > 3 {\n    fmt.Println(x)\n}\nfmt.Println(x)",
+    options: ["5 then 10", "10 then 10", "5 then 5", "compile error"],
+    answer: 0,
+    explanation: "The if statement creates a new scope with its own x=5. Inside the block x is 5. Outside, the original x=10 is printed."
+  },
+  {
+    q: "What does the init() function do in Go?",
+    options: [
+      "It is the entry point of the program",
+      "It runs automatically before main(), used to initialize package-level state",
+      "It initializes all global variables to zero",
+      "It must be called explicitly before using a package"
+    ],
+    answer: 1,
+    explanation: "init() runs automatically after all variable declarations in the package and before main(). A package can have multiple init() functions."
+  },
+  {
+    q: "What does this code print?",
+    code: "s := []int{1, 2, 3, 4, 5}\nfmt.Println(s[1:3])",
+    options: ["[1 2 3]", "[2 3]", "[2 3 4]", "[1 2]"],
+    answer: 1,
+    explanation: "s[1:3] slices from index 1 (inclusive) to 3 (exclusive), returning elements at index 1 and 2: [2 3]."
+  },
+  {
+    q: "In Go, what is a variadic function?",
+    options: [
+      "A function that returns multiple values",
+      "A function that accepts a variable number of arguments of the same type",
+      "A function that can be called without arguments",
+      "A function defined inside another function"
+    ],
+    answer: 1,
+    explanation: "A variadic function uses ... before the type of the last parameter (e.g., func sum(nums ...int)). It accepts zero or more arguments of that type."
+  },
+  {
+    q: "What does this print?",
+    code: "a, b := 1, 2\na, b = b, a\nfmt.Println(a, b)",
+    options: ["1 2", "2 1", "2 2", "1 1"],
+    answer: 1,
+    explanation: "Go supports multiple assignment. a, b = b, a swaps the values simultaneously: a becomes 2, b becomes 1."
+  },
+  {
+    q: "What is a pointer in Go?",
+    options: [
+      "A variable that stores the memory address of another variable",
+      "A reference to an interface",
+      "A function that points to another function",
+      "A slice of bytes"
+    ],
+    answer: 0,
+    explanation: "A pointer stores the memory address of a value. Use & to get the address and * to dereference (access the value at that address)."
+  },
+  {
+    q: "What does this code output?",
+    code: "x := 42\np := &x\n*p = 100\nfmt.Println(x)",
+    options: ["42", "100", "0", "panic"],
+    answer: 1,
+    explanation: "p is a pointer to x. *p = 100 modifies the value at the address p points to, which is x. So x becomes 100."
+  },
+  {
+    q: "What is a closure in Go?",
+    options: [
+      "A function that closes a channel",
+      "A function value that captures variables from its surrounding scope",
+      "A struct with private fields",
+      "A deferred function call"
+    ],
+    answer: 1,
+    explanation: "A closure is a function literal that references variables from its enclosing scope. The function 'closes over' those variables, keeping them alive."
+  },
+  {
+    q: "What does this print?",
+    code: "add := func(x, y int) int { return x + y }\nfmt.Println(add(3, 4))",
+    options: ["7", "34", "panic", "compile error"],
+    answer: 0,
+    explanation: "add is a function literal (anonymous function) assigned to a variable. Calling add(3, 4) returns 3+4 = 7."
+  },
+  {
+    q: "In Go, what is the difference between a method and a function?",
+    options: [
+      "Methods are faster than functions",
+      "A method has a receiver — it is associated with a specific type",
+      "Functions can return errors, methods cannot",
+      "There is no difference"
+    ],
+    answer: 1,
+    explanation: "A method is a function with a receiver argument, associating it with a type: func (r ReceiverType) MethodName(). Functions have no receiver."
+  },
+
+  // Goroutines & channels
+  {
+    q: "What is the difference between a buffered and unbuffered channel?",
+    options: [
+      "Buffered channels block on send until a receiver is ready; unbuffered do not",
+      "Unbuffered channels block on send until a receiver is ready; buffered channels have a capacity and only block when full",
+      "Buffered channels can only hold one value",
+      "There is no functional difference"
+    ],
+    answer: 1,
+    explanation: "Unbuffered channels synchronize sender and receiver. Buffered channels (make(chan T, n)) allow up to n sends without blocking."
+  },
+  {
+    q: "What does this code output?",
+    code: "ch := make(chan int, 3)\nch <- 1\nch <- 2\nch <- 3\nfmt.Println(len(ch), cap(ch))",
+    options: ["3 3", "0 3", "3 0", "panic"],
+    answer: 0,
+    explanation: "len(ch) returns the number of elements currently in the buffer (3). cap(ch) returns the total buffer capacity (3)."
+  },
+  {
+    q: "What keyword is used to receive from a channel in a non-blocking way?",
+    options: ["try", "select with a default case", "async", "nonblock"],
+    answer: 1,
+    explanation: "A select statement with a default case makes channel operations non-blocking. If no channel is ready, the default branch executes immediately."
+  },
+  {
+    q: "What does sending on a closed channel do in Go?",
+    options: [
+      "Returns an error",
+      "Is silently ignored",
+      "Causes a panic",
+      "Blocks forever"
+    ],
+    answer: 2,
+    explanation: "Sending to a closed channel causes a runtime panic: 'send on closed channel'. Always close from the sender side, never the receiver."
+  },
+  {
+    q: "What is the idiomatic way to iterate over all values from a channel until it's closed?",
+    options: [
+      "while ch != nil { v := <-ch }",
+      "for v := range ch { }",
+      "for { v, ok := <-ch; if !ok { break } }",
+      "Both B and C are correct"
+    ],
+    answer: 3,
+    explanation: "Both 'for v := range ch' and 'for { v, ok := <-ch; if !ok { break } }' correctly iterate until the channel is closed. range is more idiomatic."
+  },
+
+  // Error handling
+  {
+    q: "What is the idiomatic way to create a custom error in Go?",
+    options: [
+      "throw new Error('message')",
+      "errors.New('message') or fmt.Errorf('message')",
+      "panic('message')",
+      "return Error{message}"
+    ],
+    answer: 1,
+    explanation: "errors.New() creates a simple error with a message. fmt.Errorf() creates a formatted error and supports %w for error wrapping."
+  },
+  {
+    q: "What does fmt.Errorf('failed: %w', err) do differently from fmt.Errorf('failed: %v', err)?",
+    options: [
+      "They are identical",
+      "%w wraps the error so errors.Is() and errors.As() can unwrap it; %v just formats it as a string",
+      "%w prints the stack trace; %v does not",
+      "%v wraps the error; %w formats it"
+    ],
+    answer: 1,
+    explanation: "%w wraps the original error inside the new one, preserving the error chain for errors.Is() and errors.As() to inspect. %v just embeds the string."
+  },
+  {
+    q: "What does errors.Is(err, target) do?",
+    options: [
+      "Checks if err and target are the same type",
+      "Checks if err or any error in its chain matches target",
+      "Checks if err contains target as a substring",
+      "Converts err to target type"
+    ],
+    answer: 1,
+    explanation: "errors.Is traverses the error chain (unwrapping with %w) checking if any error in the chain matches the target — supporting wrapped errors."
+  },
+  {
+    q: "What does errors.As(err, &target) do?",
+    options: [
+      "Converts err to a string",
+      "Finds the first error in the chain that matches target's type and sets target to it",
+      "Creates a new error from target",
+      "Checks if err is nil"
+    ],
+    answer: 1,
+    explanation: "errors.As finds the first error in the chain assignable to target's type and sets target — useful for extracting specific error types from wrapped errors."
+  },
+
+  // Interfaces & types
+  {
+    q: "What is the empty interface interface{} (or any) in Go?",
+    options: [
+      "An interface that no type can implement",
+      "An interface with no methods — every type implements it",
+      "A null type equivalent",
+      "A generic type parameter"
+    ],
+    answer: 1,
+    explanation: "interface{} (alias: any since Go 1.18) has no methods, so every type satisfies it. It's used when you need to store values of any type."
+  },
+  {
+    q: "What does this code print?",
+    code: "var i interface{} = 42\nswitch v := i.(type) {\ncase int:\n    fmt.Println(\"int:\", v)\ncase string:\n    fmt.Println(\"string:\", v)\n}",
+    options: ["int: 42", "string: 42", "42", "panic"],
+    answer: 0,
+    explanation: "i holds an int value 42. The type switch matches the 'case int' branch and prints 'int: 42'."
+  },
+  {
+    q: "Can a Go interface embed another interface?",
+    options: [
+      "No — interfaces cannot embed other interfaces",
+      "Yes — an interface can embed other interfaces to compose a larger interface",
+      "Only if the embedded interface has no methods",
+      "Only in Go 1.18+"
+    ],
+    answer: 1,
+    explanation: "Go interfaces support embedding: type ReadWriter interface { Reader; Writer }. The embedding interface includes all methods of the embedded interfaces."
+  },
+  {
+    q: "What is a nil interface in Go?",
+    options: [
+      "An interface variable with both nil type and nil value",
+      "An interface with no methods",
+      "An interface whose methods all return nil",
+      "An uninitialized struct"
+    ],
+    answer: 0,
+    explanation: "A nil interface has both a nil type and nil value. An interface variable is only nil when both its dynamic type and dynamic value are nil."
+  },
+
+  // Slices & maps
+  {
+    q: "What does copy(dst, src) return in Go?",
+    options: [
+      "The destination slice",
+      "The number of elements copied",
+      "An error if lengths differ",
+      "Nothing (void)"
+    ],
+    answer: 1,
+    explanation: "copy(dst, src) copies min(len(dst), len(src)) elements and returns the number of elements copied."
+  },
+  {
+    q: "What is the output?",
+    code: "s := []int{1, 2, 3}\nt := s\nt = append(t, 4)\nfmt.Println(s, t)",
+    options: ["[1 2 3] [1 2 3 4]", "[1 2 3 4] [1 2 3 4]", "[1 2 3] [1 2 3]", "panic"],
+    answer: 0,
+    explanation: "t := s copies the slice header. append(t, 4) creates a new backing array (cap exceeded), so s is unchanged: [1 2 3]. t becomes [1 2 3 4]."
+  },
+  {
+    q: "How do you check if a key exists in a map in Go?",
+    options: [
+      "m.contains(key)",
+      "val, ok := m[key]",
+      "m.has(key)",
+      "key in m"
+    ],
+    answer: 1,
+    explanation: "The comma-ok idiom val, ok := m[key] returns the value and a boolean. ok is true if the key exists, false otherwise."
+  },
+  {
+    q: "What is the output?",
+    code: "m := map[string]int{}\nm[\"a\"]++\nm[\"a\"]++\nfmt.Println(m[\"a\"])",
+    options: ["0", "1", "2", "panic"],
+    answer: 2,
+    explanation: "Accessing a missing map key returns the zero value (0 for int). m['a']++ increments from 0 to 1, then again to 2."
+  },
+  {
+    q: "What does make(map[string]int, 100) do?",
+    options: [
+      "Creates a map with exactly 100 key-value pairs",
+      "Creates a map with an initial capacity hint of 100 to reduce rehashing",
+      "Creates a map that can hold at most 100 entries",
+      "Creates 100 empty string keys"
+    ],
+    answer: 1,
+    explanation: "The second argument to make() for maps is a size hint. It pre-allocates internal buckets for roughly 100 entries, improving performance for large maps."
+  },
+
+  // Structs & methods
+  {
+    q: "What is the difference between a value receiver and a pointer receiver in Go methods?",
+    options: [
+      "Value receivers can modify the original struct; pointer receivers cannot",
+      "Pointer receivers can modify the original struct; value receivers operate on a copy",
+      "They are identical in behavior",
+      "Pointer receivers are only for interfaces"
+    ],
+    answer: 1,
+    explanation: "A pointer receiver (func (t *T) Method()) can modify the original value. A value receiver (func (t T) Method()) works on a copy — changes don't affect the original."
+  },
+  {
+    q: "What does this code print?",
+    code: "type Point struct{ X, Y int }\np := Point{1, 2}\nfmt.Println(p.X + p.Y)",
+    options: ["3", "12", "1 2", "panic"],
+    answer: 0,
+    explanation: "Point{1, 2} initializes X=1 and Y=2 positionally. p.X + p.Y = 1 + 2 = 3."
+  },
+  {
+    q: "In Go, can you define methods on built-in types like int?",
+    options: [
+      "Yes, directly",
+      "No — you must create a named type first: type MyInt int",
+      "Yes, but only value receivers",
+      "No, never"
+    ],
+    answer: 1,
+    explanation: "You cannot add methods to built-in types directly. You must define a named type (type MyInt int) and then define methods on that named type."
+  },
+
+  // Packages & modules
+  {
+    q: "What does go mod tidy do?",
+    options: [
+      "Formats all Go files in the module",
+      "Adds missing and removes unused dependencies from go.mod and go.sum",
+      "Updates all dependencies to their latest versions",
+      "Runs all tests in the module"
+    ],
+    answer: 1,
+    explanation: "go mod tidy ensures go.mod and go.sum are consistent with the source code — adding missing imports and removing unused ones."
+  },
+  {
+    q: "What is the purpose of go.sum?",
+    options: [
+      "Stores the sum of all file sizes in the module",
+      "Contains cryptographic checksums of module dependencies to ensure integrity",
+      "Lists all Go files in the project",
+      "Summarizes test coverage"
+    ],
+    answer: 1,
+    explanation: "go.sum contains expected cryptographic hashes of specific module versions, ensuring downloaded dependencies haven't been tampered with."
+  },
+  {
+    q: "How do you run only tests whose names match a pattern in Go?",
+    options: [
+      "go test --name=Pattern",
+      "go test -run Pattern",
+      "go test -match Pattern",
+      "go test -filter Pattern"
+    ],
+    answer: 1,
+    explanation: "go test -run Pattern runs only test functions whose names match the regular expression Pattern. For example: go test -run TestAdd."
+  },
+  {
+    q: "What does go build -o myapp . do?",
+    options: [
+      "Builds and runs the program named myapp",
+      "Compiles the package in the current directory and outputs a binary named myapp",
+      "Creates a new module named myapp",
+      "Opens the Go playground"
+    ],
+    answer: 1,
+    explanation: "go build -o <output> <package> compiles the package and writes the binary to the specified output file name instead of the default."
+  },
+
+  // 01edu specific — more projects
+  {
+    q: "In the ascii-art project, what happens when you pass a string with only spaces?",
+    options: [
+      "The program panics",
+      "Each space is rendered using the space character's 8-line block from the font file",
+      "The program outputs nothing",
+      "Spaces are skipped entirely"
+    ],
+    answer: 1,
+    explanation: "Space (ASCII 32) is the first character in the banner font. It has its own 8-line block and is rendered just like any other character."
+  },
+  {
+    q: "In ascii-art, which Go function is best for reading all lines of the banner font file at once?",
+    options: [
+      "fmt.Scan()",
+      "os.ReadFile() combined with strings.Split(content, newline)",
+      "bufio.NewWriter()",
+      "io.ReadAll() from net/http"
+    ],
+    answer: 1,
+    explanation: "os.ReadFile() reads the entire file into memory as []byte. Converting to string and splitting by newline gives a slice of all lines easily."
+  },
+  {
+    q: "In the forum project, what SQL statement creates a new table?",
+    options: [
+      "INSERT TABLE users (...)",
+      "CREATE TABLE IF NOT EXISTS users (...)",
+      "MAKE TABLE users (...)",
+      "NEW TABLE users (...)"
+    ],
+    answer: 1,
+    explanation: "CREATE TABLE IF NOT EXISTS is the standard SQL statement to create a new table. IF NOT EXISTS prevents errors if the table already exists."
+  },
+  {
+    q: "In the forum project, which HTTP method should be used to delete a post?",
+    options: ["GET", "POST", "DELETE or POST with a hidden _method field", "PUT"],
+    answer: 2,
+    explanation: "Browsers only support GET and POST in HTML forms. The forum project typically uses POST with a hidden _method=DELETE field, or the DELETE HTTP method via JS fetch."
+  },
+  {
+    q: "In groupie-tracker, how do you decode a JSON API response into a Go struct?",
+    options: [
+      "json.Parse(body, &result)",
+      "json.NewDecoder(resp.Body).Decode(&result)",
+      "json.Unmarshal(resp, &result)",
+      "resp.JSON(&result)"
+    ],
+    answer: 1,
+    explanation: "json.NewDecoder(resp.Body).Decode(&result) streams and decodes the JSON response body directly into a Go struct — the idiomatic approach for HTTP responses."
+  },
+  {
+    q: "In ascii-web, how do you prevent the server from crashing if a handler panics?",
+    options: [
+      "Use try/catch around handlers",
+      "Use a middleware that calls recover() in a deferred function",
+      "Set http.DefaultTransport to safe mode",
+      "Go servers never crash from panics"
+    ],
+    answer: 1,
+    explanation: "A recovery middleware wraps handlers with defer/recover to catch panics and return a 500 response instead of crashing the server."
+  },
+  {
+    q: "In lem-in, what does BFS find that DFS does not guarantee?",
+    options: [
+      "Any path from start to end",
+      "The shortest path in terms of number of edges",
+      "All possible paths",
+      "The path with the least number of rooms"
+    ],
+    answer: 1,
+    explanation: "BFS (Breadth First Search) explores nodes layer by layer, guaranteeing the shortest path (fewest edges) in an unweighted graph — unlike DFS which finds any path."
+  },
+  {
+    q: "In the net-cat project, which Go type represents a TCP connection?",
+    options: [
+      "net.TCPSocket",
+      "net.Conn",
+      "http.Connection",
+      "tcp.Client"
+    ],
+    answer: 1,
+    explanation: "net.Conn is the interface representing a network connection. net.Listen returns a net.Listener, and Accept() returns a net.Conn for each client."
+  },
+  {
+    q: "In the social-network project, what is a WebSocket used for?",
+    options: [
+      "Serving static HTML files",
+      "Real-time bidirectional communication between client and server",
+      "Database connection pooling",
+      "File uploads"
+    ],
+    answer: 1,
+    explanation: "WebSockets provide a persistent, bidirectional connection between browser and server — used in social-network for real-time features like notifications and chat."
+  },
+  {
+    q: "What Go package is commonly used for WebSocket support in 01edu projects?",
+    options: [
+      "net/http/websocket",
+      "github.com/gorilla/websocket",
+      "golang.org/x/ws",
+      "net/ws"
+    ],
+    answer: 1,
+    explanation: "github.com/gorilla/websocket is the most widely used WebSocket library for Go, used in 01edu projects that require real-time communication."
+  },
+
+  // More Go Reloaded edge cases
+  {
+    q: "In Go Reloaded, what should happen if the input string is only whitespace?",
+    options: [
+      "Print the whitespace as-is",
+      "Print nothing (empty output after trimming)",
+      "Return an error",
+      "Print 8 blank lines"
+    ],
+    answer: 1,
+    explanation: "Go Reloaded trims leading/trailing spaces from the final output. A string of only whitespace becomes empty after trimming — nothing is printed."
+  },
+  {
+    q: "In Go Reloaded, can modifiers appear multiple times in one string?",
+    options: [
+      "No — only one modifier per string is allowed",
+      "Yes — each modifier applies independently to its preceding word(s)",
+      "Only two modifiers are allowed per string",
+      "Modifiers cannot be mixed in the same string"
+    ],
+    answer: 1,
+    explanation: "Multiple modifiers can appear in the same string. Each modifier applies to its own preceding word(s) independently of other modifiers."
+  },
+  {
+    q: "What is the correct output for: 'go (up) is (up) fun (up)'?",
+    options: ["GO IS FUN", "Go Is Fun", "go is fun", "GO is FUN"],
+    answer: 0,
+    explanation: "Each (up) modifier uppercases its preceding word: 'go'→'GO', 'is'→'IS', 'fun'→'FUN'. The modifiers are then removed: 'GO IS FUN'."
+  },
+  {
+    q: "In Go Reloaded, what should the output be for an input of just '(up)'?",
+    options: ["(up)", "(UP)", "", "panic"],
+    answer: 2,
+    explanation: "(up) with no preceding word applies to nothing. The modifier token is removed from output, leaving an empty string."
+  },
+
+  // Testing in Go
+  {
+    q: "What naming convention must Go test functions follow?",
+    options: [
+      "test_something()",
+      "TestSomething(t *testing.T)",
+      "@Test Something()",
+      "func Something_test()"
+    ],
+    answer: 1,
+    explanation: "Test functions must start with 'Test', followed by a name starting with an uppercase letter, and take *testing.T as the only parameter."
+  },
+  {
+    q: "What does t.Fatal() do in a Go test?",
+    options: [
+      "Logs a failure but continues the test",
+      "Marks the test as failed and stops execution of the current test immediately",
+      "Crashes the entire test suite",
+      "Skips the remaining assertions"
+    ],
+    answer: 1,
+    explanation: "t.Fatal() logs the message, marks the test as failed, and calls runtime.Goexit() to stop the current test function — unlike t.Error() which continues."
+  },
+  {
+    q: "How do you write a benchmark test in Go?",
+    options: [
+      "func BenchmarkX(b *testing.B) { for i := 0; i < b.N; i++ { ... } }",
+      "func TestBenchX(t *testing.T) { benchmark(...) }",
+      "func Bench_X() { ... }",
+      "func SpeedTestX(s *testing.Speed) { ... }"
+    ],
+    answer: 0,
+    explanation: "Benchmark functions start with 'Benchmark', take *testing.B, and loop b.N times. Run with go test -bench=. to execute benchmarks."
+  },
+  {
+    q: "What does go test -cover do?",
+    options: [
+      "Covers (hides) sensitive test output",
+      "Shows the percentage of code covered by tests",
+      "Runs tests with extra security checks",
+      "Covers all packages in the module"
+    ],
+    answer: 1,
+    explanation: "go test -cover instruments the code and reports the percentage of statements executed during tests — helping identify untested code paths."
   }
 
 ];
@@ -1925,8 +2557,19 @@ const ALL_QUESTIONS = [
 let questions = [], current = 0, score = 0, answered = false;
 let difficulty = 'easy';
 let timerSeconds = 30, timerInterval = null;
+let visitorName = '';
 const DIFF_TIME = { easy: 30, medium: 20, hard: 10 };
 const letters = ['A','B','C','D'];
+
+const GREETINGS = [
+  "Ready to level up? 🚀",
+  "Let's see what you know! 💡",
+  "Time to prove your Go skills! 💪",
+  "A new challenger approaches! ⚔️",
+  "Gopher mode: activated 🐹",
+  "Think fast, code faster! ⚡",
+  "May the best Gopher win! 🏆"
+];
 
 function shuffle(arr) {
   const a = [...arr];
@@ -1938,12 +2581,38 @@ function shuffle(arr) {
 }
 
 function show(id) {
-  ['startScreen','quizScreen','scoreScreen','lbScreen'].forEach(s =>
-    document.getElementById(s).style.display = s === id ? 'block' : 'none'
-  );
+  ['welcomeScreen','startScreen','quizScreen','scoreScreen','lbScreen'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) el.style.display = s === id ? 'block' : 'none';
+  });
   document.getElementById('progressArea').style.display =
     (id === 'quizScreen' || id === 'scoreScreen') ? 'block' : 'none';
 }
+
+function enterApp() {
+  const input = document.getElementById('visitorName');
+  visitorName = input.value.trim();
+  const greeting = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+  const welcomeLine = visitorName
+    ? `Hey ${visitorName}! ${greeting}`
+    : greeting;
+  document.getElementById('startWelcome').textContent = welcomeLine;
+  show('startScreen');
+}
+
+// On page load, show the welcome screen and set a random welcome message
+window.onload = function() {
+  const msgs = [
+    "Welcome, future Gopher! 🐹",
+    "Hello, Go developer! 👋",
+    "Ready to test your skills?",
+    "Welcome! Let's get started.",
+    "Hi there! Enter your name below."
+  ];
+  document.getElementById('welcomeMsg').textContent =
+    msgs[Math.floor(Math.random() * msgs.length)];
+  show('welcomeScreen');
+};
 
 function setDiff(d, btn) {
   difficulty = d;
@@ -2073,7 +2742,7 @@ function showScore() {
 
   // Reset save section so it's always clickable
   const input = document.getElementById('playerName');
-  input.value = '';
+  input.value = visitorName || '';
   input.disabled = false;
   input.style.opacity = '1';
   document.getElementById('savedMsg').style.display = 'none';
@@ -2093,7 +2762,7 @@ function showScore() {
 
 // ── LEADERBOARD (backed by Go server API) ─────────────────────
 async function saveScore() {
-  const name = document.getElementById('playerName').value.trim() || 'Anonymous';
+  const name = document.getElementById('playerName').value.trim() || visitorName || 'Anonymous';
   const saveBtns = document.querySelectorAll('[onclick="saveScore()"]');
   saveBtns.forEach(b => { b.disabled = true; b.style.opacity = '0.5'; });
 
