@@ -257,13 +257,6 @@
 </head>
 <body>
 <div class="container">
-  <div class="header">
-    <span class="gopher">🐹</span>
-    <h1>Imperative in Go</h1>
-    <p>01edu Curriculum Quiz</p>
-    <p style="color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-top:6px;opacity:0.5;">Built by Chekus Joseph</p>
-    <button onclick="stopTimer(); show('welcomeScreen')" style="margin-top:10px;background:transparent;border:1px solid #2a2a2a;border-radius:99px;color:#666;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;" onmouseover="this.style.borderColor='#00acd7';this.style.color='#00acd7'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#666'">← Home</button>
-  </div>
 
   <div id="progressArea" style="display:none;">
     <div class="progress-label">
@@ -281,7 +274,7 @@
       <span class="welcome-gopher">🐹</span>
       <div class="welcome-msg" id="welcomeMsg"></div>
       <div class="welcome-title">Welcome to <span>Imperative in Go</span></div>
-      <p class="welcome-subtitle">The ultimate quiz for 01edu Go curriculum students. Test yourself on real project concepts, Go fundamentals, and senior-level patterns.</p>
+      <p class="welcome-subtitle">The ultimate quiz in 01edu curriculum, for students. Test yourself on real project concepts in Go fundamentals, and senior-level patterns.</p>
 
       <div class="welcome-features">
         <div class="feature-card">
@@ -335,6 +328,7 @@
           onkeydown="if(event.key==='Enter') enterApp()" />
       </div>
       <button class="enter-btn" onclick="enterApp()">Let's Go 🐹</button>
+      <p style="margin-top:14px;color:#444;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Built by Chekus Joseph</p>
     </div>
 
     <!-- START -->
@@ -360,6 +354,7 @@
       </div>
       <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
       <button class="lb-btn" onclick="showLeaderboard()">🏆 Leaderboard</button>
+      <button onclick="stopTimer(); show('welcomeScreen')" style="margin-top:8px;width:100%;background:transparent;border:none;color:#444;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px;cursor:pointer;font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='#00acd7'" onmouseout="this.style.color='#444'">← Back to Welcome</button>
     </div>
 
     <!-- QUIZ -->
@@ -2567,7 +2562,7 @@ const GREETINGS = [
   "Time to prove your Go skills! 💪",
   "A new challenger approaches! ⚔️",
   "Gopher mode: activated 🐹",
-  "Think fast, code faster! ⚡",
+  "Hey there, think fast like a coder! ⚡",
   "May the best Gopher win! 🏆"
 ];
 
